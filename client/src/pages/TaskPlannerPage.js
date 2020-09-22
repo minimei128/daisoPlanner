@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useHistory, Link } from "react-router-dom";
 import Axios from 'axios';
+
+import { Button} from 'react-bootstrap';
 
 //import Login css
 import '../css/TaskPlanner.css'
@@ -23,13 +25,19 @@ function TaskPlanner () {
     let history = useHistory();
 
     const logout = () => {
-        Axios.get('http://localhost:3001/api/gets/logout').then((response) => {
+        Axios.get('http://localhost:3002/api/gets/logout').then((response) => {
                 console.log(response);
                 history.push("/");
         });
 };
 
-    
+useEffect(()=>{
+    Axios.get('http://localhost:3002/api/gets/Login').then((response) =>{
+        console.log(response);
+    });
+});
+
+
         return(
            
             // main container
@@ -51,10 +59,10 @@ function TaskPlanner () {
                         <Link to = '/SettingPage' className="nav-link">Account Settings</Link>
                     </div>
 
-                    <div className="sidebar-item" onClick={logout}>
+                    <div className="sidebar-item" >
                     <img src={logout_icon} className="App-logo" alt="icon"/>
-                    <Link to = '/' className="nav-link">Logout</Link>
-                    
+                    <Button onClick={logout} className="nav-link">Logout</Button>
+
                     </div>
              </div>
                 {/* end of SideMenu Bar */}
@@ -69,7 +77,10 @@ function TaskPlanner () {
                             {/* List container */}
                             {/* icon to assign employees */}
                             <div className ="assign-employee-section">
-                                    <img src={assign_employee_icon} className="App-icon" alt="icon" />
+                                    <img 
+                                    src={assign_employee_icon} 
+                                    className="App-icon" 
+                                    alt="icon" />
                                 </div>
                             <div className="list-wrapper">
                                 {/* body that contains list (light grey) */}

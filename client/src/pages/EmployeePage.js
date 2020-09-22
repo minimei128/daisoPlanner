@@ -23,15 +23,14 @@ function Employee () {
         const [lastName, setLastName] = useState("");
         const [positionTitle, setPositionTitle] = useState("");
 
-        // const [newFirstName, setNewFirstName] = useState("");
-        // const [newLastName, setNewLastName] = useState("");
-        // const [newPositionTitle, setNewPositionTitle] = useState("");
-
         const [employeeList, setEmployeeList] = useState([]);
 
-        useEffect(() => {
+        
+
+        useEffect(() => { 
             Axios.get("http://localhost:3002/api/get/EmployeeList").then((response)=>{
                 setEmployeeList(response.data);
+                
             });
         });
 
@@ -59,9 +58,7 @@ function Employee () {
             setFirstName("")
             setLastName("")
             setPositionTitle("")
-            // setNewFirstName("")
-            // setNewLastName("")
-            // setNewPositionTitle("")
+            
         };
         return(
 
