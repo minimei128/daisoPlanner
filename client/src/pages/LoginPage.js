@@ -16,18 +16,18 @@ function Login() {
     const [password, setPassword] = useState('')
    
     const validateLogin = () => {
-        Axios.post('http://localhost:3001/api/posts/login', {
+        Axios.post('http://localhost:3002/api/posts/login', {
             employeeNumber: employeeNumber, 
             password: password,
      });
 };
 
-// useEffect(()=>{
-//     Axios.get('http://localhost:3001/api/gets/Login').then((response) =>{
-//         console.log(response);
-//         history.push("/TaskPlannerPage");
-//     });
-// });
+useEffect(()=>{
+    Axios.get('http://localhost:3002/api/gets/Login').then((response) =>{
+        console.log(response);
+        history.push("/TaskPlannerPage");
+    });
+});
 
 Axios.defaults.withCredentials = true;
         return(

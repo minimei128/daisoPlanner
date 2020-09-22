@@ -1,0 +1,58 @@
+button {
+
+    background-color: #FF32AD;
+    font-size: 16px;
+    padding: 5px;
+    transition-duration: 0.4s;
+    color: white;
+    border: none;
+    width: 80px;
+    margin: 5px;
+    text-align: center;
+}
+
+button:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button-group{
+    flex-direction: row;
+}
+
+.left-side-wrapper{
+    float: left;
+}
+
+.right-side-wrapper{
+    float: right;
+}
+
+.login-form-container{
+    display: inline-block;
+    padding: 15px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    width: 400px;
+    -webkit-box-shadow: 0 10px 20px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.3);
+    text-align: center;
+    position: relative;
+    z-index: 100;
+    top: -80px;
+} 
+
+.table{
+    width: 600px;
+    border: 1px solid #D3D3D3;
+    -webkit-box-shadow: 0 5px 15px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,0.3);
+    text-align: center;
+    position: fixed;
+    z-index: 100;
+    top: 20px;
+}
+
+.App-logo{
+    width: 10px;
+    height: 10px;
+}

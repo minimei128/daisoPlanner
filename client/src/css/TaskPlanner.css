@@ -1,0 +1,176 @@
+.wrapper {
+
+    background-color: white;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: 650px;
+    position: relative;
+    z-index: 100;
+    top: -80px;
+  }
+ 
+ .wrapper .planner {
+    display: inline-block;
+    
+  }
+
+  .planner{
+      width: 360px;
+      border-right: 6px solid white;
+  }
+
+
+
+.main-view-container{
+    margin-left: 50px;
+}
+
+.planner-header{
+    display: inline-flex;
+    flex-direction: row;
+}
+
+#header-style{
+   
+    padding: 10px;
+    margin-right: 40px;
+    width: 310px;
+    color: white;
+    -webkit-box-shadow: 0 5px 5px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.3);
+}
+
+.mon-box{
+    background-color: #7ac7bf;
+    padding: 14px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.tue-box{
+    background-color: #ff8b94;
+    padding: 14px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.wed-box{
+    background-color: #f0a858;
+    padding: 14px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.thu-box{
+    background-color: #99cc00;
+    padding: 14px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.fri-box{
+    background-color: #cc99cc;
+    padding: 14px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.sat-box{
+    background-color: #adcbe3;
+    padding: 14px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.sun-box{
+    background-color: #b9c6c5;
+    padding: 14px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.App-icon{
+    width: 34px;
+    height: 31px;
+    padding: 5px;
+   
+}
+
+.list-group{
+    
+    width: 345px;
+    height: 620px;
+    background-color: lightgrey;
+    border-right: 6px solid white;
+}
+
+.assign-employee-section{
+    padding: 10px;
+}
+
+.card{
+   margin: 10px;
+   height: auto;
+   background-color: white; 
+}
+
+.list-of-task-wrapper{
+    width: 330px;
+}
+
+.list-group-item{
+    margin-left: -42px;
+    margin-right: 50px;
+    background-color: lightgrey;
+}
+
+.Task-icon{
+    width: 20px;
+    height: 22px;
+    padding: 5px;
+   
+}
+
+.list-wrapper{
+    height:500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.card-header p {
+    display: inline block;
+}
+
+.float-left{
+    float: left;
+}
+
+.float-right{
+    float: right;
+}
+
+.top-header{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.Delete-icon{
+    width: 18px;
+    height: 18px;
+    margin-bottom: 5px;
+    margin-right: -20px;
+}
+
+.task{
+    display: flex;
+    justify-content: space-between;
+}
