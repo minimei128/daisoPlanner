@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import { useHistory, Link } from "react-router-dom";
 import Axios from 'axios';
 
-import { Button} from 'react-bootstrap';
 
 //import Login css
 import '../css/TaskPlanner.css'
@@ -26,8 +25,8 @@ function TaskPlanner () {
 
     const logout = () => {
         Axios.get('http://localhost:3002/api/gets/logout').then((response) => {
-                console.log(response);
-                history.push("/");
+            if (response.data.loggedIn === false) {
+                history.push("/");}
         });
 };
 
@@ -61,7 +60,7 @@ useEffect(()=>{
 
                     <div className="sidebar-item" >
                     <img src={logout_icon} className="App-logo" alt="icon"/>
-                    <Button onClick={logout} className="nav-link">Logout</Button>
+                    <button onClick={logout} className="nav-link">Logout</button>
 
                     </div>
              </div>

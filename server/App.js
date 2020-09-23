@@ -54,7 +54,7 @@ app.post("/api/posts/login", (req, res)=>{
             if(results.length > 0){
                 req.session.user = results;
                 console.log("login successful");
-                console.log(req.session.user);
+                res.redirect('/api/gets/Login');
                 
             }else{
                 console.log('Incorrect Employee ID and/or Password!');
@@ -72,9 +72,10 @@ app.post("/api/posts/login", (req, res)=>{
 app.get('/api/gets/Login', (req, res) => {
             
     if(req.session.user){
-        res.send({loggedIn: true, user: req.session.user})
+        console.log({loggedIn: true, user: req.session.user})
+        
     }else{
-        res.send({loggedIn: false})
+        console.log({loggedIn: false})
     }
     res.end();
 });

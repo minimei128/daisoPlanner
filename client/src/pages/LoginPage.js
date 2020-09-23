@@ -24,12 +24,13 @@ function Login() {
 
 useEffect(()=>{
     Axios.get('http://localhost:3002/api/gets/Login').then((response) =>{
-        console.log(response);
-        history.push("/TaskPlannerPage");
+        if (response.data.loggedIn === true) {
+        history.push("/TaskPlannerPage")}
     });
 });
 
 Axios.defaults.withCredentials = true;
+
         return(
 
                 <div className="container">
