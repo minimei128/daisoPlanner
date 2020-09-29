@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Axios from 'axios'
 
 //import Login css
@@ -16,18 +16,23 @@ function Login() {
     const [password, setPassword] = useState('')
    
     const validateLogin = () => {
-        Axios.post('http://localhost:3002/api/posts/login', {
+        Axios.post('http://localhost:3002/post/login', {
             employeeNumber: employeeNumber, 
             password: password,
-     });
+     }).then((response) =>{
+        
+                       console.log(response)
+                        history.push("/TaskPlannerPage")
+     })
 };
 
-useEffect(()=>{
-    Axios.get('http://localhost:3002/api/gets/Login').then((response) =>{
-        if (response.data.loggedIn === true) {
-        history.push("/TaskPlannerPage")}
-    });
-});
+// useEffect(()=>{
+//     Axios.get('http://localhost:3002/get/login').then((response) =>{
+//         if (response.data.loggedIn === true) {
+//             console.log("hiiii"+response)
+//         history.push("/TaskPlannerPage")}
+//     });
+// });
 
 Axios.defaults.withCredentials = true;
 
@@ -67,11 +72,14 @@ Axios.defaults.withCredentials = true;
                     </div>
 
                     {/* login button */}
-                    
+                    {/* <Link to = '/TaskPlannerPage'> */}
                     <button 
                     type="login" 
                     className="login-btn"
-                    onClick={validateLogin}>LOGIN</button>
+                    onClick={validateLogin}
+                    
+                    >LOGIN</button>
+                    {/* </Link> */}
                    </div>
                 </div>
         );

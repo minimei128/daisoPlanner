@@ -1,6 +1,9 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useHistory, Link } from "react-router-dom";
 import Axios from 'axios';
+
+import Modal from 'react-bootstrap/Modal'
+
 
 
 //import Login css
@@ -21,20 +24,38 @@ import delete_task from '../icons/Delete.png';
 
 function TaskPlanner () {
 
-    let history = useHistory();
+
+    useEffect(() => { 
+        Axios.get("http://localhost:3002/get/assignEmployee").then((response)=>{
+            setEmployeeList(response.data);
+            
+        });
+    });
+
+    const addEmployeeCard = () => {
+        Axios.post("http://localhost:3002/post/assignEmployee", { 
+            firstName: firstName, 
+            lastName: lastName, 
+        });
+        setEmployeeList([...employeeList, {firstName: firstName, lastName: lastName},]);
+    };
 
     const logout = () => {
-        Axios.get('http://localhost:3002/api/gets/logout').then((response) => {
+        Axios.get('http://localhost:3002/logout').then((response) => {
             if (response.data.loggedIn === false) {
-                history.push("/");}
+                console.log("end"+response)
+                // history.push("/");
+            }
         });
 };
 
-useEffect(()=>{
-    Axios.get('http://localhost:3002/api/gets/Login').then((response) =>{
-        console.log(response);
-    });
-});
+    const [show, setShow] = useState(false);
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [employeeList, setEmployeeList] = useState([]);
 
 
         return(
@@ -42,6 +63,7 @@ useEffect(()=>{
             // main container
             <div className="container">
 
+            {/* ------------------------------ */}
                 {/* SideMenu Bar */}
                 <div className="sidenav"> 
                     <div className="sidebar-item">
@@ -60,12 +82,13 @@ useEffect(()=>{
 
                     <div className="sidebar-item" >
                     <img src={logout_icon} className="App-logo" alt="icon"/>
-                    <button onClick={logout} className="nav-link">Logout</button>
+                    <Link to ='/' onClick={logout} className="nav-link">Logout</Link>
 
                     </div>
              </div>
                 {/* end of SideMenu Bar */}
-            
+            {/* ------------------------------ */}
+
             {/* Main View Container */}
                 <div className="wrapper">
 
@@ -79,8 +102,31 @@ useEffect(()=>{
                                     <img 
                                     src={assign_employee_icon} 
                                     className="App-icon" 
-                                    alt="icon" />
+                                    alt="icon"
+                                    onClick={handleShow} />
                                 </div>
+
+                                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                    <div class="form-group">
+  <label for="sel1">Assign Employee:</label>
+  <select class="form-control" id="sel1">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </select>
+</div>
+                    </Modal.Body>
+                     <Modal.Footer>
+                    <button  onClick={handleClose}>Confirm</button>
+                    </Modal.Footer>
+                </Modal>
+
+
                             <div className="list-wrapper">
                                 {/* body that contains list (light grey) */}
                                 <div className="list-group">
@@ -91,7 +137,7 @@ useEffect(()=>{
                                                 <div className="top-header">
                                                     <span>Employee Name</span>
                                                     <span>DM</span>
-                                                    <span><img src={delete_card} className="Delete-icon" alt="icon" /></span> 
+                                                    <span><img src={delete_card} className="Delete-icon" alt="icon"  /></span> 
                                                     </div> 
                                                     <hr></hr>
                                                     <div className="form-group">
@@ -129,7 +175,7 @@ useEffect(()=>{
 
                     {/* Weekly Planner */}
                     <div className="planner">
-                        {/* Monday */}
+                        {/* Tuesday */}
                         <div className="tue-box">Tuesday</div>
                             {/* List container */}
                             {/* icon to assign employees */}
@@ -160,18 +206,7 @@ useEffect(()=>{
                                         {/* Card Body */}
                                             <div className="card-body">
                                         
-                                            {/* item */}
-                                            <ul className="list-of-task-wrapper">   
-                                                <li className="list-group-item">
-                                                    <div className="task custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="check2"></input>
-                                                        <label className="custom-control-label" htmlFor="check2">Task 1</label>
-                                                        <img src={delete_task} className="Task-icon" alt="icon" />
-                                                </div>
-                                                </li>
-                                                
-                                            </ul>
-                                            {/* ends item */}
+                                            
                                           
                             
                                             </div>
@@ -184,7 +219,7 @@ useEffect(()=>{
 
                     {/* Weekly Planner */}
                     <div className="planner">
-                        {/* Monday */}
+                        {/* Wednesday */}
                         <div className="wed-box">Wednesday</div>
                             {/* List container */}
                             {/* icon to assign employees */}
@@ -215,17 +250,7 @@ useEffect(()=>{
                                         {/* Card Body */}
                                             <div className="card-body">
                                         
-                                            {/* item */}
-                                            <ul className="list-of-task-wrapper">   
-                                                <li className="list-group-item">
-                                                    <div className="task custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="check2"></input>
-                                                        <label className="custom-control-label" htmlFor="check2">Task 1</label>
-                                                        <img src={delete_task} className="Task-icon" alt="icon" />
-                                                </div>
-                                                </li>
-                                                
-                                            </ul>
+                            
                                             {/* ends item */}
                                           
                             
@@ -239,7 +264,7 @@ useEffect(()=>{
 
                     {/* Weekly Planner */}
                     <div className="planner">
-                        {/* Monday */}
+                        {/* Thursday */}
                         <div className="thu-box">Thursday</div>
                             {/* List container */}
                             {/* icon to assign employees */}
@@ -270,17 +295,7 @@ useEffect(()=>{
                                         {/* Card Body */}
                                             <div className="card-body">
                                         
-                                            {/* item */}
-                                            <ul className="list-of-task-wrapper">   
-                                                <li className="list-group-item">
-                                                    <div className="task custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="check2"></input>
-                                                        <label className="custom-control-label" htmlFor="check2">Task 1</label>
-                                                        <img src={delete_task} className="Task-icon" alt="icon" />
-                                                </div>
-                                                </li>
-                                                
-                                            </ul>
+                                           
                                             {/* ends item */}
                                           
                             
@@ -294,7 +309,7 @@ useEffect(()=>{
 
                     {/* Weekly Planner */}
                     <div className="planner">
-                        {/* Monday */}
+                        {/* Friday */}
                         <div className="fri-box">Friday</div>
                             {/* List container */}
                             {/* icon to assign employees */}
@@ -325,18 +340,6 @@ useEffect(()=>{
                                         {/* Card Body */}
                                             <div className="card-body">
                                         
-                                            {/* item */}
-                                            <ul className="list-of-task-wrapper">   
-                                                <li className="list-group-item">
-                                                    <div className="task custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="check2"></input>
-                                                        <label className="custom-control-label" htmlFor="check2">Task 1</label>
-                                                        <img src={delete_task} className="Task-icon" alt="icon" />
-                                                </div>
-                                                </li>
-                                                
-                                            </ul>
-                                            {/* ends item */}
                                           
                             
                                             </div>
@@ -349,7 +352,7 @@ useEffect(()=>{
 
                     {/* Weekly Planner */}
                     <div className="planner">
-                        {/* Monday */}
+                        {/* Saturday */}
                         <div className="sat-box">Saturday</div>
                             {/* List container */}
                             {/* icon to assign employees */}
@@ -379,19 +382,6 @@ useEffect(()=>{
                                             {/* end card header */}
                                         {/* Card Body */}
                                             <div className="card-body">
-                                        
-                                            {/* item */}
-                                            <ul className="list-of-task-wrapper">   
-                                                <li className="list-group-item">
-                                                    <div className="task custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="check2"></input>
-                                                        <label className="custom-control-label" htmlFor="check2">Task 1</label>
-                                                        <img src={delete_task} className="Task-icon" alt="icon" />
-                                                </div>
-                                                </li>
-                                                
-                                            </ul>
-                                            {/* ends item */}
                                           
                             
                                             </div>
@@ -404,7 +394,7 @@ useEffect(()=>{
 
                     {/* Weekly Planner */}
                     <div className="planner">
-                        {/* Monday */}
+                        {/* Sunday */}
                         <div className="sun-box">Sunday</div>
                             {/* List container */}
                             {/* icon to assign employees */}
@@ -435,19 +425,7 @@ useEffect(()=>{
                                         {/* Card Body */}
                                             <div className="card-body">
                                         
-                                            {/* item */}
-                                            <ul className="list-of-task-wrapper">   
-                                                <li className="list-group-item">
-                                                    <div className="task custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="check2"></input>
-                                                        <label className="custom-control-label" htmlFor="check2">Task 1</label>
-                                                        <img src={delete_task} className="Task-icon" alt="icon" />
-                                                </div>
-                                                </li>
-                                                
-                                            </ul>
-                                            {/* ends item */}
-                                          
+                                            
                             
                                             </div>
                                         </div>

@@ -38,7 +38,7 @@ app.use(cors({
 // ----- START-----
 
 //------post: login employeenumber and password to validate in backend
-app.post("/api/posts/login", (req, res)=>{
+app.post("/post/login", (req, res)=>{
         
     const employeeNumber = req.body.employeeNumber;
     const password = req.body.password;
@@ -54,7 +54,12 @@ app.post("/api/posts/login", (req, res)=>{
             if(results.length > 0){
                 req.session.user = results;
                 console.log("login successful");
-                res.redirect('/api/gets/Login');
+
+                if(req.session.user){
+                    console.log({loggedIn: true, user: req.session.user})
+                }else{
+                    console.log({loggedIn: false})
+                }
                 
             }else{
                 console.log('Incorrect Employee ID and/or Password!');
@@ -68,20 +73,18 @@ app.post("/api/posts/login", (req, res)=>{
     
 });
 
-//------get: direct to taskmanagement page after successful login
-app.get('/api/gets/Login', (req, res) => {
+// //------get: direct to taskmanagement page after successful login
+// app.get('/get/login', (req, res) => {
             
-    if(req.session.user){
-        console.log({loggedIn: true, user: req.session.user})
-        
-    }else{
-        console.log({loggedIn: false})
-    }
-    res.end();
-});
+//     if(req.session.user){
+//         console.log({loggedIn: true, user: req.session.user})
+//     }else{
+//         console.log({loggedIn: false})
+//     }
+// });
 
  //------get: logout
- app.get("/api/gets/logout", (req, res)=>{
+ app.get("/logout", (req, res)=>{
     if(req.session.user){
         res.clearCookie('userID');
         res.send({loggedIn: false})
@@ -183,6 +186,19 @@ app.put('/api/update/updateUserDetail', (req, res)=>{
             console.log(err);
         }
 
+    });
+});
+
+//-------get employee for modal dropdown menu
+app.get('/get/assignEmployee', (req, res)=>{
+    const sqlSelect = ("SELECT firstName, lastName FROM TaskManagementDatabase.employee;")
+    db.query(sqlSelect, (err, results)=> {
+        if(err){
+            
+            console.log(err);
+        }
+
+        res.send(results);
     });
 });
 //settin up the server
